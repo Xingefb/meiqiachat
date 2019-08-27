@@ -4,23 +4,22 @@
 #import <MQChatViewManager.h>
 
 @implementation MeiqiachatPlugin
+
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  FlutterMethodChannel* channel = [FlutterMethodChannel
-      methodChannelWithName:@"meiqiachat"
-            binaryMessenger:[registrar messenger]];
-  MeiqiachatPlugin* instance = [[MeiqiachatPlugin alloc] init];
-// --- add applicationDelegate
+    FlutterMethodChannel* channel = [FlutterMethodChannel
+                                     methodChannelWithName:@"meiqiachat"
+                                     binaryMessenger:[registrar messenger]];
+    MeiqiachatPlugin* instance = [[MeiqiachatPlugin alloc] init];
+    // --- add applicationDelegate
     [registrar addApplicationDelegate:instance];
-  [registrar addMethodCallDelegate:instance channel:channel];
+    [registrar addMethodCallDelegate:instance channel:channel];
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
-  if ([@"getPlatformVersion" isEqualToString:call.method]) {
-    result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
-  }else if ([@"initMeiqiaSdk" isEqualToString:call.method]) {
+  if ([@"initMeiqiaSdk" isEqualToString:call.method]) {
     [self initSdk:call.arguments result:result];
   }else if ([@"toChat" isEqualToString:call.method]) {
-    [self pushToMeiqiaVC];
+    [self pushToMeiqiaVCWith:call.arguments];
   }else {
     result(FlutterMethodNotImplemented);
   }
@@ -37,24 +36,27 @@
     }];
 }
 
-#pragma mark  集成第五步: 跳转到聊天界面(button的点击方法)
-- (void)pushToMeiqiaVC {
+#pragma mark  集成第五步: 跳转到聊天界面
+- (void)pushToMeiqiaVCWith:(NSNumber* ) isPush{
+
+    UIViewController *viewController = [UIApplication sharedApplication].delegate.window.rootViewController;
     MQChatViewManager *chatViewManager = [[MQChatViewManager alloc] init];
     [chatViewManager setoutgoingDefaultAvatarImage:[UIImage imageNamed:@"meiqia-icon"]];
-    [chatViewManager pushMQChatViewControllerInViewController:[UIApplication sharedApplication].delegate.window.rootViewController];
+    if (isPush.boolValue) {
+        [chatViewManager pushMQChatViewControllerInViewController:viewController];
+    }else {
+        [chatViewManager presentMQChatViewControllerInViewController:viewController];
+    }
+    
 }
 
 #pragma mark - AppDelegate
 - (void)applicationWillEnterForeground:(UIApplication *)application {
 #pragma mark  集成第二步: 进入前台 打开meiqia服务
-    NSLog(@"是否走了这个方法2 ");
-
     [MQManager openMeiqiaService];
 }
 - (void)applicationDidEnterBackground:(UIApplication *)application {
 #pragma mark  集成第三步: 进入后台 关闭美洽服务
-    NSLog(@"是否走了这个方法3 ");
-
     [MQManager closeMeiqiaService];
 }
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {

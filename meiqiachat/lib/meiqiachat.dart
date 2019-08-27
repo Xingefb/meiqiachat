@@ -3,22 +3,13 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class Meiqiachat {
-  static const MethodChannel _channel =
-      const MethodChannel('meiqiachat');
+  static const MethodChannel _channel = const MethodChannel('meiqiachat');
 
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
+  static Future<void> initMeiqiaSdkWith(String appkey) async {
+    await _channel.invokeMethod('initMeiqiaSdk', appkey);
   }
 
-  static Future<bool> initMeiqiaSdkWith(String appkey) async {
-    final bool isSuccess = await _channel.invokeMethod('initMeiqiaSdk',appkey);
-    return isSuccess;
+  static Future<void> toChat({bool isPush}) async {
+    await _channel.invokeMethod('toChat', isPush);
   }
-
-  static Future<bool> toChat({String appkey}) async {
-    final bool isSuccess = await _channel.invokeMethod('toChat');
-    return isSuccess;
-  }
-
 }

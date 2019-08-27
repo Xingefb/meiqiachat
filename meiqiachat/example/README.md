@@ -1,16 +1,49 @@
-# meiqiachat_example
+# meiqiachat
 
-Demonstrates how to use the meiqiachat plugin.
+美洽客服移动sdk3.5.8 接入 适配iOS、android 针对工作上需求会酌情继续 添加相应功能
+如有交流敬请邮箱联系loselfmin@gmail.com
 
-## Getting Started
+实现功能
+1、初始化sdk
+2、启动对话页面
 
-This project is a starting point for a Flutter application.
+iOS 真机如果出现语言没有跟随系统可以添加
+```
+<key>CFBundleLocalizations</key>
+<array>
+    <string>zh_CN</string>
+    <string>zh_TW</string>
+    <string>en</string>
+</array>
+```
+到info.plist中
 
-A few resources to get you started if this is your first Flutter project:
+## 简单使用
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+1、初始化sdk
+在项目 main.dart 初始化时候初始化
+```
+ @override
+  void initState() {
+    super.initState();
+    initMeiqia();
+  }
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  Future<void> initMeiqia() async {
+    try {
+      await Meiqiachat.initMeiqiaSdkWith(
+          appkey);
+    } catch (e) {}
+  }
+```
+
+2、启动聊天页面
+
+```
+void _toChat() async{
+    try {
+        <!-- isPush 为iOS的跳转状态 默认为present -->
+        await Meiqiachat.toChat(isPush: true);
+    } catch (e){}
+}
+```

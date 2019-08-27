@@ -1,7 +1,7 @@
 name: meiqiachat
-description: A new flutter plugin project.
-version: 0.0.1
-author: loself 
+description: A meiqia sdk beat 002 
+version: 1.0.1
+author: loself <loselfmin@gmail.com>
 homepage: https://github.com/Xingefb/meiqiachat
 
 environment:

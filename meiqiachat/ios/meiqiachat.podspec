@@ -3,14 +3,14 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'meiqiachat'
-  s.version          = '0.0.1'
-  s.summary          = 'A new flutter plugin project.'
+  s.version          = '1.0.1'
+  s.summary          = 'meiqia sdk init and to chat'
   s.description      = <<-DESC
 A new flutter plugin project. to use meiqian chat
                        DESC
   s.homepage         = 'http://example.com'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'loself' => 'loselfmin@gmail.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'

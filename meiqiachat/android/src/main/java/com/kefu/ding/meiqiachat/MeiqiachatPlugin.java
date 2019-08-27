@@ -35,9 +35,7 @@ public class MeiqiachatPlugin implements MethodCallHandler {
 
   @Override
   public void onMethodCall(MethodCall call, Result result) {
-    if (call.method.equals("getPlatformVersion")) {
-      result.success("Android " + android.os.Build.VERSION.RELEASE);
-    } else if (call.method.equals("initMeiqiaSdk")) {
+    if (call.method.equals("initMeiqiaSdk")) {
       setup(call, result);
     } else if (call.method.equals("toChat")) {
       toChat(call, result);

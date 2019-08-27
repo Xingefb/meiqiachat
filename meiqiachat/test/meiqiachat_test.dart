@@ -15,7 +15,7 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('getPlatformVersion', () async {
-    expect(await Meiqiachat.platformVersion, '42');
+  test('initMeiqiaSdkWith', () async {
+    expect(await Meiqiachat.initMeiqiaSdkWith('appkey').toString(), (){});
   });
 }
