@@ -1,5 +1,7 @@
 # meiqiachat
 
+简书教程 https://www.jianshu.com/p/e05f54ab2ecc
+
 美洽客服移动sdk3.5.8 接入 适配iOS、android 针对工作上需求会酌情继续 添加相应功能
 如有交流敬请邮箱联系loselfmin@gmail.com
 

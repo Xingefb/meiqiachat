@@ -25,8 +25,11 @@
   }
 }
 
+#pragma mark  集成第一步: 初始化,  参数:appkey  ,尽可能早的初始化appkey.
+/**
+* 初始化sdk
+*/ 
 - (void)initSdk:(NSString *)appKey result:(FlutterResult)result{
-  #pragma mark  集成第一步: 初始化,  参数:appkey  ,尽可能早的初始化appkey.
     [MQManager initWithAppkey:appKey completion:^(NSString *clientId, NSError *error) {
         if (!error) {
           NSLog(@"美洽 SDK：初始化成功");
@@ -37,6 +40,9 @@
 }
 
 #pragma mark  集成第五步: 跳转到聊天界面
+/**
+* 初始化聊天页面 isPush 为 iOS 跳转方式 默认present
+*/ 
 - (void)pushToMeiqiaVCWith:(NSNumber* ) isPush{
 
     UIViewController *viewController = [UIApplication sharedApplication].delegate.window.rootViewController;

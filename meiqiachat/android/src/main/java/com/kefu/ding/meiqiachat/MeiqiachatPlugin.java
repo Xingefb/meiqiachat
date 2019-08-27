@@ -17,6 +17,7 @@ import com.meiqia.meiqiasdk.util.MQIntentBuilder;
 /** MeiqiachatPlugin */
 public class MeiqiachatPlugin implements MethodCallHandler {
 
+  /// 获取context
   private Registrar registrar;
   private MethodChannel channel;
   public static MeiqiachatPlugin instance;
@@ -44,6 +45,9 @@ public class MeiqiachatPlugin implements MethodCallHandler {
     }
   }
 
+  /**
+  * 初始化sdk
+  */ 
   public void setup(MethodCall call, Result result) {
     MQManager.setDebugMode(true);
     String meiqiaKey = call.arguments.toString();
@@ -57,6 +61,9 @@ public class MeiqiachatPlugin implements MethodCallHandler {
     });
   }
 
+  /**
+  * 初始化聊天页面 isPush 为 iOS 跳转方式 默认present 
+  */ 
   public void toChat(MethodCall call, Result result) {
     Intent intent = new MQIntentBuilder(registrar.context()).build();
     registrar.context().startActivity(intent);
